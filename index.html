@@ -59,9 +59,14 @@
   .close{float:right; background:none; color:var(--sub); font-size:1.5rem; padding:0; line-height:1; cursor:pointer; font-weight:400; transition:.12s}
   .close:hover{color:var(--ink)}
 
-  /* グループ化用のCSS */
-  .ing-group { margin-bottom: 16px; border-left: 3px solid var(--line); padding-left: 12px; }
-  .ing-label { font-size: 0.75rem; color: var(--sub); font-weight: 700; margin-bottom: 8px; letter-spacing: 0.05em; }
+/* 変更前：グループ化用のCSS を以下に差し替え */
+  details.ing-group { margin-bottom: 12px; background: var(--panel2); border-radius: 12px; border: 1px solid var(--line); transition: .2s; }
+  details.ing-group[open] { padding-bottom: 14px; background: var(--panel); border-color: var(--accent); box-shadow: var(--shadow); }
+  summary.ing-label { font-size: 0.85rem; color: var(--ink); font-weight: 700; padding: 12px 14px; cursor: pointer; user-select: none; list-style: none; display: flex; align-items: center; justify-content: space-between; }
+  summary.ing-label::-webkit-details-marker { display: none; }
+  summary.ing-label::after { content: '＋'; color: var(--sub); font-size: 1.2rem; font-weight: 400; line-height: 1; }
+  details[open] summary.ing-label::after { content: '−'; color: var(--accent); }
+  details .chips { padding: 0 14px; }
 </style>
 </head>
 <body>
@@ -141,15 +146,20 @@ function renderControls() {
       <div id="ing-container">
   `;
 
-  // カテゴリごとにブロックを生成
+  // カテゴリごとにアコーディオンブロックを生成
   for (const catName in grouped) {
     if (grouped[catName].length === 0) continue;
     const chips = grouped[catName].map(i => `<div class="chip ${sel.ingredients.includes(i) ? 'on' : ''}" data-val="${i}">${i}</div>`).join('');
+    
+    // 選択中の食材が含まれているカテゴリ、または「肉・魚介」はデフォルトで開いておく
+    const hasSelected = grouped[catName].some(i => sel.ingredients.includes(i));
+    const isOpen = (catName === "🥩 肉・魚介類" || hasSelected) ? 'open' : '';
+
     html += `
-        <div class="ing-group">
-          <div class="ing-label">${catName}</div>
+        <details class="ing-group" ${isOpen}>
+          <summary class="ing-label">${catName}</summary>
           <div class="chips">${chips}</div>
-        </div>
+        </details>
     `;
   }
   
