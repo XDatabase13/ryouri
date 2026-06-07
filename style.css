@@ -63,3 +63,18 @@ summary.ing-label::-webkit-details-marker { display: none; }
 summary.ing-label::after { content: '＋'; color: var(--sub); font-size: 1.2rem; font-weight: 400; line-height: 1; }
 details[open] summary.ing-label::after { content: '−'; color: var(--accent); }
 details .chips { padding: 0 14px; }
+
+footer { margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--line); text-align: center; font-size: .82rem; color: var(--sub); }
+.footer-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+.footer-links a { color: var(--blue); text-decoration: none; transition: .13s; }
+.footer-links a:hover { color: var(--accent); text-decoration: underline; }
+
+.back-link { color: var(--blue); text-decoration: none; font-size: .85rem; transition: .13s; }
+.back-link:hover { color: var(--accent); }
+.page-heading { font-size: 1.2rem; font-weight: 800; margin-bottom: 4px; }
+.page-subtext { font-size: .8rem; color: var(--sub); margin-bottom: 22px; }
+.disclaimer-section { margin-bottom: 22px; }
+.disclaimer-section:last-child { margin-bottom: 0; }
+.section-title { font-size: .85rem; font-weight: 700; color: var(--sub); margin-bottom: 8px; letter-spacing: .03em; border-left: 3px solid var(--accent); padding-left: 10px; }
+.disclaimer-section p { font-size: .92rem; line-height: 1.75; color: var(--ink); }
+.disclaimer-list { font-size: .9rem; line-height: 2; color: var(--ink); padding-left: 1.4em; margin-top: 10px; }
